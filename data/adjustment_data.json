@@ -1,0 +1,13 @@
+{
+  "clients": [
+    {
+      "client_name": "lyons",
+      "base_url": "https://testing.quicketsolutions.info/lyons/",
+      "username": "skhanna@quicketsolutions.com",
+      "password": "Q!q1q1q1q1",
+      "ticket_id": "P4003322",
+      "amount": "-5",
+      "reason": "adjustment"
+    }
+  ]
+}
