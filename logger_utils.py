@@ -79,4 +79,7 @@ def log_step(name: str) -> Callable:
                 raise
         return wrapper
     return decorator
+step_log: logging.Logger = get_step_logger()
+result_log: logging.Logger = get_result_logger()
+debug_log: logging.Logger = get_debug_file_logger()
 

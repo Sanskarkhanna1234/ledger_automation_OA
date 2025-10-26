@@ -76,3 +76,26 @@ def driver():
         drv.quit()
     except Exception:
         pass
+# --- ADD THIS FIXTURE (keeps other logic untouched) -------------------------
+
+@pytest.fixture(scope="session")
+def finance_client():
+    """
+    Return a single client dict for finance-table tests.
+    Prefers data/adjustment_data.json (has base_url/username/password/ticket).
+    Falls back to data/ledger_client_data.json if needed.
+    """
+    # Preferred file (used in your recent flows)
+    pref_path = os.path.join("data", "adjustment_data.json")
+    alt_path  = os.path.join("data", "ledger_client_data.json")
+
+    path = pref_path if os.path.exists(pref_path) else alt_path
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # Both files store under "clients"
+    clients = data.get("clients", [])
+    if not clients:
+        raise RuntimeError(f"No clients found in {path}")
+
+    return clients[0]  # single client dict with base_url/username/password/etc.
